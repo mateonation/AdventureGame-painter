@@ -25,6 +25,7 @@ function genGame(){
         div.classList.add('cell');
         // Cell does a function if the mouse is over it
         div.addEventListener('mouseover', function(){
+            showPosition(this.id);
             // Execute cell painting function if mouse is clicking
             if(mouseIsClicking){
                 cellPainter(this.id);
@@ -129,7 +130,7 @@ function selectElement(){
     return value;
 }
 
-// Funtion that opens the export popup -WIP
+// Funtion that opens the export popup
 function exportGrid(){
     let textarea=document.getElementById('exportarea');
     let wall=[];
@@ -206,9 +207,15 @@ function exportGrid(){
     popup.style.visibility='visible';
 }
 
-// Function that closes the export popup -WIP
+// Function that closes the export popup
 function closePopup(){
     popup.removeAttribute('style');
+}
+
+// Show the position where the player is hovering their mouse
+function showPosition(position){
+    let bottomdis=document.getElementsByClassName('bottom-screen')[0];
+    bottomdis.textContent=position;
 }
 
 // Change 'mouse is clicking' value to true if mouse is being clicked
