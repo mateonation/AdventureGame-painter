@@ -80,6 +80,10 @@ body{
     grid-template-columns:repeat(51, 1fr);
     grid-template-rows:repeat(25, 1fr);
     border:3px solid #000000;
+    div{
+        display:block;
+        padding-top:0px;
+    }
     .cell{
         width:24px;
         height:24px;
