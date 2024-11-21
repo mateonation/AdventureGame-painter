@@ -6,7 +6,37 @@
     </head>
     <body>
         <section class="top-screen">TOP SCREEN</section>
-        <section class="game-grid"></section>
+        <section class="container">
+            <section class="game-grid"></section>
+            <div>
+                <label for="select_element">
+                    Select:
+                    <select id="elements_index">
+                        <option value="none">none</option>
+                        <option value="wall">wall</option>
+                        <option value="lava">lava</option>
+                        <option value="door">door</option>
+                        <option value="door-button">door-button</option>
+                        <option value="player-spawn">player-spawn</option>
+                    </select>
+                </label>
+                <label for="reset_element">
+                    Erase:
+                    <div>
+                        <select id="erase_index">
+                            <option value="none">none</option>
+                            <option value="wall">wall</option>
+                            <option value="lava">lava</option>
+                            <option value="door">door</option>
+                            <option value="door-button">door-button</option>
+                            <option value="player-spawn">player-spawn</option>
+                        </select>
+                        <button id="resetbtn">RESET</button>
+                    </div>
+                </label>
+                <button id="export" onclick="exportGrid();">EXPORT</button>
+            </div>
+        </section>
         <section class="bottom-screen">BOTTOM SCREEN</section>
         <script src="js/advgamepainter-script.js"></script>
     </body>
