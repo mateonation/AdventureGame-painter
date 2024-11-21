@@ -9,11 +9,19 @@ body{
     display:grid;
     grid-template-rows: auto 1fr auto;
 }
-.top-screen{
-    background:red;
+.top-screen,.bottom-screen{
+    background:#00803a;
+    color:#ffffff;
+    padding:20px;
 }
-.bottom-screen{
-    background:lime;
+.top-screen{
+    font-size:xx-large;
+    text-align:center;
+    font-weight:bold;
+    p{
+        font-size:medium;
+        margin-bottom:0;
+    }
 }
 .container{
     margin-top:auto;
