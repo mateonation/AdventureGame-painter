@@ -1,6 +1,7 @@
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x;let y;
+let mouseIsClicking;
 
 window.onload=function(){
     //Generate game
@@ -36,16 +37,23 @@ function genGame(){
         }
     }
 }
-
+// Change 'mouse is clicking' variable in order to the mouse clicking
+gameGrid.addEventListener('mousedown', ()=>mouseIsClicking=true);
+gameGrid.addEventListener('mouseup',   ()=>mouseIsClicking=false);
 // Paint cells (WIP)
 function testClick(){
     // Read clicked cell's id
     let clicked=document.getElementById(this.id);
-    if(clicked.classList.contains('cell')){
-        clicked.classList.remove('cell');
-        clicked.classList.add('wall');
-    }else{
-        clicked.classList.remove('wall');
-        clicked.classList.add('cell');
+    // Paint or remove cell class if the mouse is clicking the body of the page
+    if(mouseIsClicking){
+        // If the cell has 'cell' class => replace it by other one (WIP)
+        if(clicked.classList.contains('cell')){
+            clicked.classList.remove('cell');
+            clicked.classList.add('wall');
+        // If not => replace other class for 'cell';
+        }else{
+            clicked.classList.remove('wall');
+            clicked.classList.add('cell');
+        }
     }
 }
