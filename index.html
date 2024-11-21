@@ -5,6 +5,13 @@
         <link rel="stylesheet" href="css/advgamepainter-styles.css">
     </head>
     <body>
+        <div class="popup-overlay" id="popupOverlay">
+            <div class="popup-window" id="popupWindow">
+                <h1>EXPORT</h1>
+                <textarea id="exportarea" readonly></textarea>
+                <button id="closepopup" onclick="closePopup();">CLOSE</button>
+            </div>
+        </div>
         <section class="top-screen">TOP SCREEN</section>
         <section class="container">
             <section class="game-grid"></section>
