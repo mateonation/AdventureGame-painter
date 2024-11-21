@@ -131,6 +131,78 @@ function selectElement(){
 
 // Funtion that opens the export popup -WIP
 function exportGrid(){
+    let textarea=document.getElementById('exportarea');
+    let wall=[];
+    let lava=[];
+    let door=[];
+    let spawnpoint;
+    let door_button;
+    // Read all elements' position on grid
+    for(i=0;i<cells.length;i++){
+        let cell=document.getElementById(cells[i].id);
+        // If cell's class is a cell => skip to next iteration
+        if(!cell.classList.contains('cell')){
+            // If cell is a wall
+            if(cell.classList.contains('wall')){
+                wall.push(cell.id);
+            }
+            // If cell is lava
+            if(cell.classList.contains('lava')){
+                lava.push(cell.id);
+            }
+            // If cell is a door
+            if(cell.classList.contains('door')){
+                door.push(cell.id);
+            }
+            // If cell is a spawnpoint
+            if(cell.classList.contains('player-spawn')){
+                spawnpoint=cell.id;
+            }
+            // If cell is a door button
+            if(cell.classList.contains('door-button')){
+                door_button=cell.id;
+            }
+        }
+    }
+    let txtareastr='';
+    // save all the positions in the string
+    if(wall.length!=0){
+        txtareastr='wall=[';
+        for(i=0;i<wall.length;i++){
+            if(i>0){
+                txtareastr+=',';
+            }
+            txtareastr+='"'+wall[i]+'"'
+        }
+        txtareastr+='];\n';
+    }
+    if(lava.length!=0){
+        txtareastr+='lava=[';
+        for(i=0;i<lava.length;i++){
+            if(i>0){
+                txtareastr+=',';
+            }
+            txtareastr+='"'+lava[i]+'"'
+        }
+        txtareastr+='];\n';
+    }
+    if(door.length!=0){
+        txtareastr+='door=[';
+        for(i=0;i<door.length;i++){
+            if(i>0){
+                txtareastr+=',';
+            }
+            txtareastr+='"'+door[i]+'"'
+        }
+        txtareastr+='];\n';
+    }
+    if(door_button!=undefined){
+        txtareastr+='door_button="'+door_button+'";\n';
+    }
+    if(spawnpoint!=undefined){
+        txtareastr+='spawnpoint="'+spawnpoint+'";\n';
+    }
+    textarea.textContent=txtareastr;
     popup.style.visibility='visible';
 }
 
