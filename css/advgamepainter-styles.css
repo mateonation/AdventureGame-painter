@@ -1,0 +1,56 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    height:100vh;
+    margin:0;
+    
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+}
+.top-screen{
+    background:red;
+}
+.bottom-screen{
+    background:lime;
+}
+.game-grid{
+    display:grid;
+    width:fit-content;
+    height:fit-content;
+    grid-template-columns:repeat(51, 1fr);
+    grid-template-rows:repeat(25, 1fr);
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left:auto;
+    margin-right:auto;
+    border:3px solid #000000;
+    .cell{
+        width:24px;
+        height:24px;
+        background:#61ff61;
+    }
+    .cell:nth-child(even){
+        background:#56d156;
+    }
+    .player{
+        background:#ffd700;
+        border:4px solid rgb(0, 26, 255);
+        border-radius:2px;
+    }
+    .wall{
+        background:black;
+    }
+    .lava{
+        background:red;
+    }
+    .door{
+        background:burlywood;
+    }
+    .door-button{
+        background:magenta;
+    }
+    .goal{
+        background:cyan;
+    }
+}
