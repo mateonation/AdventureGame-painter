@@ -1,7 +1,7 @@
 let gameGrid=document.querySelector('.game-grid');
 const xinitial=-25;const yinitial=12;
 let x;let y;
-let mouseIsClicking;
+let mouseIsClicking=false;
 
 window.onload=function(){
     //Generate game
@@ -20,8 +20,17 @@ function genGame(){
         div.id=x+"/"+y;
         // Add 'cell' class to the div
         div.classList.add('cell');
-        // Adding a function that activates when user moves it's cursor on the cell (WIP)
-        div.addEventListener('mouseover', testClick);
+        // Cell does a function if the mouse is over it
+        div.addEventListener('mouseover', function(){
+            // Execute cell painting function if mouse is clicking
+            if(mouseIsClicking){
+                cellPainter(this.id);
+            }
+        });
+        // Execute cell painting function when cell is being clicked
+        div.addEventListener('mousedown', function(){
+            cellPainter(this.id);
+        });
         // Show cell on the screen
         gameGrid.append(div);
         // If X gets to the final element of the row
@@ -37,23 +46,25 @@ function genGame(){
         }
     }
 }
-// Change 'mouse is clicking' variable in order to the mouse clicking
-gameGrid.addEventListener('mousedown', ()=>mouseIsClicking=true);
-gameGrid.addEventListener('mouseup',   ()=>mouseIsClicking=false);
 // Paint cells (WIP)
-function testClick(){
+function cellPainter(cell){
     // Read clicked cell's id
-    let clicked=document.getElementById(this.id);
-    // Paint or remove cell class if the mouse is clicking the body of the page
-    if(mouseIsClicking){
-        // If the cell has 'cell' class => replace it by other one (WIP)
-        if(clicked.classList.contains('cell')){
-            clicked.classList.remove('cell');
-            clicked.classList.add('wall');
-        // If not => replace other class for 'cell';
-        }else{
-            clicked.classList.remove('wall');
-            clicked.classList.add('cell');
-        }
+    let clicked=document.getElementById(cell);
+    // If the cell has 'cell' class => replace it by other one (WIP)
+    if(clicked.classList.contains('cell')){
+        clicked.classList.remove('cell');
+        clicked.classList.add('wall');
+    // If not => replace other class for 'cell';
+    }else{
+        clicked.classList.remove('wall');
+        clicked.classList.add('cell');
     }
 }
+// Change 'mouse is clicking' value to true if mouse is being clicked
+window.addEventListener('mousedown', function(){
+    mouseIsClicking=true
+})
+// Change 'mouse is clicking' value to false if when the mouse's clicking is released
+window.addEventListener('mouseup', function(){
+    mouseIsClicking=false
+})
