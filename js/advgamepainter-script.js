@@ -17,8 +17,10 @@ function genGame(){
         let div=document.createElement('div');
         // Add XY position
         div.id=x+"/"+y;
-        // Add a class to the div according to the level's number
+        // Add 'cell' class to the div
         div.classList.add('cell');
+        // Adding a function that activates when user moves it's cursor on the cell (WIP)
+        div.addEventListener('mouseover', testClick);
         // Show cell on the screen
         gameGrid.append(div);
         // If X gets to the final element of the row
@@ -32,5 +34,18 @@ function genGame(){
             // Increment X position by 1
             x++;
         }
+    }
+}
+
+// Paint cells (WIP)
+function testClick(){
+    // Read clicked cell's id
+    let clicked=document.getElementById(this.id);
+    if(clicked.classList.contains('cell')){
+        clicked.classList.remove('cell');
+        clicked.classList.add('wall');
+    }else{
+        clicked.classList.remove('wall');
+        clicked.classList.add('cell');
     }
 }
