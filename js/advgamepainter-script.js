@@ -1,5 +1,6 @@
 let cells=[];
 let gameGrid=document.querySelector('.game-grid');
+let popup=document.querySelector('.popup-overlay');
 const xinitial=-25;const yinitial=12;
 let x;let y;
 let mouseIsClicking=false;
@@ -127,6 +128,17 @@ function selectElement(){
     let value=sel.options[sel.selectedIndex].value;
     return value;
 }
+
+// Funtion that opens the export popup -WIP
+function exportGrid(){
+    popup.style.visibility='visible';
+}
+
+// Function that closes the export popup -WIP
+function closePopup(){
+    popup.removeAttribute('style');
+}
+
 // Change 'mouse is clicking' value to true if mouse is being clicked
 window.addEventListener('mousedown', function(){
     mouseIsClicking=true
