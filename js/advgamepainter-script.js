@@ -133,11 +133,14 @@ function selectElement(){
 // Funtion that opens the export popup
 function exportGrid(){
     let textarea=document.getElementById('exportarea');
+    // ELEMENTS THAT CAN HAVE MULTIPLE IDs
     let wall=[];
     let lava=[];
     let door=[];
+    // ELEMENTS THAT ONLY HAVE ONE POSITION
     let spawnpoint;
     let door_button;
+    let goal;
     // Read all elements' position on grid
     for(i=0;i<cells.length;i++){
         let cell=document.getElementById(cells[i].id);
@@ -162,6 +165,10 @@ function exportGrid(){
             // If cell is a door button
             if(cell.classList.contains('door-button')){
                 door_button=cell.id;
+            }
+            // If cell is a door button
+            if(cell.classList.contains('goal')){
+                goal=cell.id;
             }
         }
     }
@@ -197,11 +204,15 @@ function exportGrid(){
         }
         txtareastr+='];\n';
     }
+    // ELEMENTS THAT SHOULD ONLY HAVE ONE VALUE
     if(door_button!=undefined){
         txtareastr+='door_button="'+door_button+'";\n';
     }
     if(spawnpoint!=undefined){
         txtareastr+='spawnpoint="'+spawnpoint+'";\n';
+    }
+    if(goal!=undefined){
+        txtareastr+='goal="'+goal+'";\n';
     }
     textarea.textContent=txtareastr;
     popup.style.visibility='visible';
