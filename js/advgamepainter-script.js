@@ -5,6 +5,7 @@ const xinitial=-25;const yinitial=12;
 let x;let y;
 let mouseIsClicking=false;
 let iserasing=false;
+let unique_el_sel=false;
 
 window.onload=function(){
     //Generate game
@@ -53,11 +54,20 @@ function genGame(){
 }
 // Paint cells (WIP)
 function cellPainter(cell){
+    // Elements that should have one unique position
+    let uniqueElements=['door-button','player-spawn','goal'];
     // Read clicked cell's id
     let clicked=document.getElementById(cell);
     let paintLike=selectElement();
     // Read first class of the cell
     let firstclass=clicked.classList.item(0);
+    if(uniqueElements.includes(paintLike)){
+        // If the element to paint is one included on the array of elements of unique position, alert the user for the first time only
+        if(!unique_el_sel){
+            alert('The next elements should only have one position:\n\n'+uniqueElements);
+            unique_el_sel=true;
+        }
+    }
     // If the cell has 'cell' class => replace it for the one that's assigned on select menu
     if(clicked.classList.contains('cell')){
         clicked.classList.remove('cell');
@@ -85,7 +95,7 @@ function resetElement(){
     // If it's ALL elements, ask for confirmation
     // If 'no' is selected, stop function
     }else if(toerase==='all'){
-        if(!confirm('This will erase all the elements on the grid.\nContinue?')){
+        if(!confirm('This will erase all the elements on the grid.\n\nContinue?')){
             return;
         }
     }
