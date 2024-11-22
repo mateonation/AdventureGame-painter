@@ -1,6 +1,9 @@
 let cells=[];
 let gameGrid=document.querySelector('.game-grid');
 let popup=document.querySelector('.popup-overlay');
+let textarea=document.getElementById('exportarea');
+let clipboardbtn=document.getElementById('copytext');
+let closebtn=document.getElementById('closepopup');
 const xinitial=-25;const yinitial=12;
 let x;let y;
 let mouseIsClicking=false;
@@ -142,7 +145,7 @@ function selectElement(){
 
 // Funtion that opens the export popup
 function exportGrid(){
-    let textarea=document.getElementById('exportarea');
+    clipboardbtn.removeAttribute('style');
     // ELEMENTS THAT CAN HAVE MULTIPLE IDs
     let wall=[];
     let lava=[];
@@ -225,7 +228,22 @@ function exportGrid(){
         txtareastr+='goal="'+goal+'";\n';
     }
     textarea.textContent=txtareastr;
+    // Copy to clipboard button won't show if the textarea is blank
+    if(txtareastr===''){
+        clipboardbtn.style.visibility='hidden';
+        clipboardbtn.style.position='fixed';
+    }else{
+        clipboardbtn.textContent='COPY TO CLIPBOARD';
+    }
+    closebtn.textContent='CLOSE';
     popup.style.visibility='visible';
+}
+
+// Function that copies in clipboard all the text written on the textbox of the popup
+function copytoClipboard(){
+    navigator.clipboard.writeText(textarea.textContent);
+    // Change text on the button
+    clipboardbtn.textContent='COPIED!';
 }
 
 // Function that closes the export popup
