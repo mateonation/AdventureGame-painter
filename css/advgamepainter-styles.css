@@ -16,11 +16,11 @@ body{
 }
 .top-screen{
     font-size:xx-large;
-    text-align:center;
     font-weight:bold;
     p{
         font-size:medium;
         margin-bottom:0;
+        
     }
 }
 .container{
