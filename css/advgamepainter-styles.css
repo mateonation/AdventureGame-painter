@@ -76,8 +76,13 @@ body{
     grid-template-rows:repeat(25, 1fr);
     border:3px solid #000000;
     div{
-        display:block;
+        display:flex;
         padding-top:0px;
+        color:#ffffff;
+        font-size:large;
+        font-weight:700;
+        align-items:center;
+        justify-content:center;
     }
     .cell{
         width:24px;
@@ -103,6 +108,9 @@ body{
     }
     .door-button{
         background:magenta;
+    }
+    .bridge-button{
+        background:#c73f00;
     }
     .goal{
         background:cyan;

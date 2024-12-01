@@ -9,6 +9,7 @@ let x;let y;
 let mouseIsClicking=false;
 let iserasing=false;
 let unique_el_sel=false;
+const uniqueElements=['door-button','player-spawn','goal','bridge-button'];
 
 window.onload=function(){
     //Generate game
@@ -57,10 +58,9 @@ function genGame(){
 }
 // Paint cells (WIP)
 function cellPainter(cell){
-    // Elements that should have one unique position
-    let uniqueElements=['door-button','player-spawn','goal'];
     // Read clicked cell's id
     let clicked=document.getElementById(cell);
+    // Read option from the select menu to paint cells
     let paintLike=selectElement();
     // Read first class of the cell
     let firstclass=clicked.classList.item(0);
@@ -71,19 +71,38 @@ function cellPainter(cell){
             unique_el_sel=true;
         }
     }
-    // If the cell has 'cell' class => replace it for the one that's assigned on select menu
-    if(clicked.classList.contains('cell')){
-        clicked.classList.remove('cell');
-        clicked.classList.add(paintLike);
-    // If the cell's first class it's not like the one that's selected
-    }else if(clicked.classList.item(0)!=paintLike){
-        clicked.classList.remove(firstclass);
-        clicked.classList.add(paintLike);
-    // If the cell has the class that's selected => turn it into 'cell' class
-    }else if(clicked.classList.contains(paintLike)){
-        clicked.classList.remove(paintLike);
-        clicked.classList.add('cell');
+    // If the option to paint cells is the bridge, change only the text content
+    if(paintLike==='B'){
+        // If the button clicked was a bridge button, remove it's class and add cell class
+        if(clicked.classList.contains('bridge-button')){
+            clicked.classList.remove('bridge-button');
+            clicked.classList.add('cell');
+        }
+        if(clicked.textContent==='B'){
+            clicked.textContent='';
+        }else{
+            clicked.textContent='B';
+        }
+    }else{
+        // IF THE OPTION TO PAINT IS THE BRIDGE BUTTON AND THE CONTENT OF THE CELL IS A BRIDGE, REMOVE BRIDGE
+        if(paintLike==='bridge-button' && clicked.textContent==='B'){
+            clicked.textContent='';
+        }
+        // If the cell has 'cell' class => replace it for the one that's assigned on select menu
+        if(clicked.classList.contains('cell')){
+            clicked.classList.remove('cell');
+            clicked.classList.add(paintLike);
+        // If the cell's first class it's not like the one that's selected
+        }else if(clicked.classList.item(0)!=paintLike){
+            clicked.classList.remove(firstclass);
+            clicked.classList.add(paintLike);
+        // If the cell has the class that's selected => turn it into 'cell' class
+        }else if(clicked.classList.contains(paintLike)){
+            clicked.classList.remove(paintLike);
+            clicked.classList.add('cell');
+        }
     }
+    
 }
 
 // Function to erase elements
@@ -112,6 +131,14 @@ function resetElement(){
                 if(firstclass!='cell'){
                     cell.classList.remove(firstclass);
                     cell.classList.add('cell');
+                }
+            }
+            break;
+        case 'B':
+            for(i=0;i<cells.length;i++){
+                let cell=document.getElementById(cells[i].id);
+                if(cell.textContent===toerase){
+                    cell.textContent='';
                 }
             }
             break;
@@ -150,15 +177,20 @@ function exportGrid(){
     let wall=[];
     let lava=[];
     let door=[];
+    let bridge=[];
     // ELEMENTS THAT ONLY HAVE ONE POSITION
     let spawnpoint;
     let door_button;
     let goal;
+    let bridge_button;
     // Read all elements' position on grid
     for(i=0;i<cells.length;i++){
         let cell=document.getElementById(cells[i].id);
         // If cell's class is a cell => skip to next iteration
         if(!cell.classList.contains('cell')){
+            if(cell.textContent==='B'){
+                bridge.push(cell.id);
+            }
             // If cell is a wall
             if(cell.classList.contains('wall')){
                 wall.push(cell.id);
@@ -170,6 +202,9 @@ function exportGrid(){
             // If cell is a door
             if(cell.classList.contains('door')){
                 door.push(cell.id);
+            }
+            if(cell.classList.contains('bridge-button')){
+                bridge_button=cell.id;
             }
             // If cell is a spawnpoint
             if(cell.classList.contains('player-spawn')){
@@ -217,9 +252,22 @@ function exportGrid(){
         }
         txtareastr+='];\n';
     }
+    if(bridge.length!=0){
+        txtareastr+='bridge=[';
+        for(i=0;i<bridge.length;i++){
+            if(i>0){
+                txtareastr+=',';
+            }
+            txtareastr+='"'+bridge[i]+'"'
+        }
+        txtareastr+='];\n';
+    }
     // ELEMENTS THAT SHOULD ONLY HAVE ONE VALUE
     if(door_button!=undefined){
-        txtareastr+='door_button="'+door_button+'";\n';
+        txtareastr+='doorbutton="'+door_button+'";\n';
+    }
+    if(bridge_button!=undefined){
+        txtareastr+='bridgebutton="'+bridge_button+'";\n';
     }
     if(spawnpoint!=undefined){
         txtareastr+='spawnpoint="'+spawnpoint+'";\n';
