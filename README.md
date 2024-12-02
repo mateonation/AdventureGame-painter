@@ -16,7 +16,9 @@ These are:
 - Walls
 - Lava
 - Door
+- Bridge
 - Door opener button
+- Bridge deployer button
 - Player's spawn point
 - Goal point
 
@@ -32,4 +34,4 @@ Finally, when the user is done designing it's level, they can press the 'EXPORT'
 This makes a 'pop-up' window appear at the center of the screen displaying a textbox that shows every position for any cell contained in an array. Ready to be copy-and-pasted into the script of the original "AdventureGame" on a new case in the switch of the _modifyCell();_ function!
 
 >[!WARNING]
->Please, make sure that 'door opener', 'spawn point' and 'goal' elements are painted **<ins>NOT PAINTED ON MULTIPLE CELLS</ins>** as the export text area will only show one position for each of them.
+>Please, make sure that 'door opener', 'bridge button', 'spawn point' and 'goal' elements are painted **<ins>NOT PAINTED ON MULTIPLE CELLS</ins>** as the export text area will only show one position for each of them.
